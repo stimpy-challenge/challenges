@@ -1,0 +1,25 @@
+--- 
+- hosts: all
+  become:  true 
+  tasks:
+    - name: Deploy config development 
+      copy:
+        dest: /etc/app-config.conf
+        content:   "databaseServer=development"
+        owner:  root 
+        group:  users 
+        mode: '0644'
+      when: ('development' in group_names)
+
+
+    - name: Deploy config production
+      copy:
+        dest: /etc/app-config.conf
+        content:   "databaseServer=production"
+        owner:  root
+        group:  users
+        mode: '0644'
+      when: ('production' in group_names)
+ 
+
+ 
